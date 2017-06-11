@@ -1,0 +1,89 @@
+/* =HELPER CLASSES
+--------------------------------------------- */
+
+.logo {
+  margin-bottom: $lineheight;
+}
+
+.wrap {
+  max-width: to_rem(452);
+  margin: 0 auto;
+}
+
+
+/* Colouring helpers */
+
+.faded {
+  color: rgba($text-color, .5);
+}
+
+.light {
+  color: $light;
+}
+
+/* Global state modifiers */
+
+.larger {
+  font-size: to_em(19);
+}
+
+.largest {
+  font-size: to_em(23);
+}
+
+.smaller {
+  font-size: to_em(14);
+}
+
+.no-margin {
+  margin-bottom: 0;
+}
+
+.small-margin {
+  margin-bottom: $lineheight / 2;
+}
+
+.margin-around {
+  margin-top: $lineheight;
+  margin-bottom: $lineheight;
+}
+
+.mode--negative {
+  color: $negative;
+}
+
+.mode--info {
+  color: $comp-blue;
+}
+
+.mode--positive {
+  color: $positive;
+}
+
+.app__icon {
+  width: 1.2em; // ~18px
+  height: 1.2em;
+  border-radius: 3px;
+}
+
+/* Visiblity */
+
+// Hide but not remove
+.visually-hidden {
+  position: absolute;
+  left: -999em;
+}
+
+/* Icons */
+
+.icon {
+  fill: currentColor;  // Will be inherited from parent's 'color' property.
+  width: $default-icon-size;
+  height: $default-icon-size;
+  vertical-align: middle;
+  pointer-events: none;   // Safari won't react on JS click events without this.
+}
+
+a .icon {
+  cursor: pointer;
+}

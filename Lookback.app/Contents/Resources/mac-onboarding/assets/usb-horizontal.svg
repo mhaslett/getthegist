@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="386px" height="17px" viewBox="0 0 386 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3 (11970) - http://www.bohemiancoding.com/sketch -->
+    <title>usb-horizontal</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path id="path-1" d="M815.98223,351.132783 C815.484282,351.135536 815.080569,350.72588 815.080514,350.231708 L815.080217,347.547167 L807.883876,347.546371 C806.657296,347.535654 806.068507,347.033849 806.084591,345.750872 L806.084094,341.262621 C806.100178,339.979644 806.6564,339.456803 807.88298,339.46752 L815.079322,339.468315 L815.079024,336.783774 C815.078969,336.283371 815.490683,335.879735 815.980601,335.882139 L840,336 L840,341 L1191.99925,340.716447 L1191.99999,346 L840.000001,346 L839.999998,351.000001 L815.98223,351.132783 Z"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="onboarding-3" sketch:type="MSArtboardGroup" transform="translate(-806.000000, -335.000000)">
+            <g id="usb-horizontal">
+                <use fill="none" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

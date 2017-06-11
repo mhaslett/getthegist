@@ -1,0 +1,17 @@
+/* =ANIMATIONS
+--------------------------------------------- */
+
+@keyframes heart-pulsate {
+  0% {
+    color: $accent;
+    opacity: .8;
+  }
+  50% {
+    color: lighten(saturate($accent, 10%), 10%);
+    opacity: 1;
+  }
+  100% {
+    color: $accent;
+    opacity: .8;
+  }
+}

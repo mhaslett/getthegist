@@ -1,0 +1,431 @@
+/* =BUTTONS
+--------------------------------------------- */
+
+@mixin disabled($background, $foreground: #fff) {
+  background-color: rgba(lighten(desaturate($background, 20%), 10%), .8);
+  color: rgba($foreground, .7);
+  box-shadow: none;
+}
+
+@mixin push-button-mode($bg, $offset) {
+  background-color: $bg;
+  // Fancy ass shadow
+  box-shadow: darken($bg, 10%) 0 1px 0,
+              darken($bg, 20%) 0 $offset 0;
+
+  @if(lightness($bg) < 50%) {
+    color: rgba(#fff, .9);
+
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+  @else {
+    color: lighten($text-color, 5%);
+
+    &:hover,
+    &:focus {
+      color: $text-color;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background-color: lighten(saturate($bg, 4%), 1%);
+  }
+
+  &:active {
+    box-shadow: darken($bg, 10%) 0 1px 0;
+  }
+}
+
+/* A regular fucking button */
+.btn {
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  user-select: none;
+
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: default;
+
+  font: normal 1.1em/1.4 $sans;
+  text-align: center;
+  padding: .6em 4em;
+
+  border: 0;
+  border-radius: 3em;
+
+  color: #fff;
+  background-color: $btn-color;
+
+  transition: background-color .05s ease-out,
+              box-shadow .1s ease-out;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    background-color: lighten(saturate($btn-color, 10%), 3%);
+  }
+
+  &:active {
+    transition: none;
+    background-color: darken($btn-color, 8%);
+    box-shadow: inset rgba(#000, .2) 0 1px 2px;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: #efefef;
+    color: rgba(51, 51, 51, 0.4);
+    box-shadow: inset rgba(51, 51, 51, 0.1) 0 0 0 1px;
+  }
+
+  .spinner-circular {
+    position: relative;
+    top: -1ex;
+    margin-right: .25em;
+    font-size: .5em;
+  }
+
+  &.mode--primary {
+    background-color: $btn-color-primary;
+
+    &:hover,
+    &:focus {
+      background-color: saturate($btn-color-primary, 10%);
+    }
+
+    &:active {
+      background-color: darken($btn-color-primary, 8%);
+    }
+  }
+
+  &.mode--danger {
+    background-color: $btn-color-danger;
+
+    &:hover,
+    &:focus {
+      background-color: lighten(saturate($btn-color-danger, 20%), 2%);
+      box-shadow: rgba($btn-color-danger, .4) 0 0 3px;
+    }
+
+    &:active {
+      background-color: darken($btn-color-danger, 6%);
+    }
+  }
+
+  &.mode--dark {
+    background-color: #000;
+
+    &:hover,
+    &:focus {
+      background-color: rgba(#000, .7);
+    }
+
+    &:active {
+      color: rgba(#fff, .8);
+      background-color: rgba(#000, .9);
+    }
+  }
+
+  &.mode--light {
+    background-color: $light;
+    color: $text-color;
+
+    &:hover,
+    &:focus {
+      background-color: rgba($light, .8);
+    }
+
+    &:active {
+      background-color: darken($light, 8%);
+    }
+  }
+
+  &.mode--transparent {
+    background: transparent;
+    color: $text-color;
+    transition: color .2s ease-out;
+
+    &:active,
+    &:focus,
+    &[disabled] {
+      background-color: transparent;
+      color: inherit;
+      box-shadow: none;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: lighten($text-color, 15%);
+    }
+  }
+
+  &.mode--link {
+    color: $comp-blue;
+    background: transparent;
+    padding: 0;
+
+    &:active,
+    &:focus {
+      background-color: transparent;
+      color: darken($comp-blue, 12%);
+      box-shadow: none;
+    }
+
+    &[disabled] {
+      background-color: transparent;
+      color: $grey-tint;
+      box-shadow: none;
+
+      &:hover {
+        color: $grey-tint;
+        text-decoration: none;
+      }
+    }
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: $comp-blue;
+    }
+
+    &.faded:hover {
+      color: rgba($text-color, .8);
+    }
+  }
+
+  &.mode--gray {
+    background-color: $grey-dark;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($grey-dark, 5%);
+    }
+
+    &:active {
+      background-color: darken($grey-dark, 3%);
+    }
+  }
+
+  &.mode--subtle {
+    border: 1px solid #cdcdcd;
+    padding: 0.5em 0.7em;
+    background-color: #fdfdfd;
+    color: #777;
+
+    &:hover {
+      background-color: #fff;
+      box-shadow: none;
+      border-color: #c5c5c5;
+    }
+
+    &:active,
+    &:focus {
+      box-shadow: none;
+      color: #555;
+      background-color: #fafafa;
+    }
+
+    &[disabled] {
+      box-shadow: none;
+      background-color: #f5f5f5;
+      color: #aaa;
+    }
+  }
+
+  // A relief button, with more "push affordance".
+  &.style--push {
+    $offset: 3px;
+
+    border-radius: 4px;
+    position: relative;
+    padding: .7em 1.4em;
+    font-weight: 300;
+    top: -$offset;
+    margin-top: $offset;  // Accomodate for offset
+    transition: color .2s ease,
+                background-color .1s ease-out;
+
+    // White is default.
+    @include push-button-mode(#fefefe, $offset);
+
+    &:active {
+      top: -1px;
+    }
+
+    &.mode--primary {
+      @include push-button-mode($accent, $offset);
+    }
+  }
+
+  &.style--square {
+    border-radius: $border-radius;
+  }
+
+  &.style--ghost {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px currentColor;
+    color: $btn-color;
+    transition: none;
+
+    &:hover,
+    &:focus {
+      background-color: $btn-color;
+      color: #fff;
+      box-shadow: none;
+    }
+
+    &:active {
+      color: #fff;
+      background-color: darken($btn-color, 10%);
+    }
+
+    &[disabled] {
+      background: transparent;
+      color: desaturate($btn-color, 20%);
+      opacity: .5;
+      box-shadow: inset 0 0 0 1px;
+    }
+
+    &.mode--primary {
+      color: darken($comp-green, 10%);
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: $comp-green;
+      }
+
+      &:active {
+        color: #fff;
+        background-color: darken($comp-green, 10%);
+      }
+    }
+
+    &.mode--dark {
+      color: $dark;
+      transition: box-shadow .2s ease-out, color .2s ease-out;
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+        box-shadow: inset currentColor 0 0 0 1px;
+        color: rgba($dark, .6);
+      }
+
+      &:active {
+
+      }
+    }
+
+    &.mode--gray {
+      color: #eee;
+      box-shadow: inset 0 0 0 2px #888;
+      transition: color .2s ease, box-shadow .2s ease;
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+        color: #fff;
+        box-shadow: inset 0 0 0 2px #ccc;
+      }
+
+      &:active {
+        color: #ccc;
+        box-shadow: inset 0 0 0 2px #8a8a8a;
+      }
+    }
+
+    &.mode--danger {
+      color: $btn-color-danger;
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: $btn-color-danger;
+      }
+
+      &:active {
+        background-color: darken($btn-color-danger, 10%);
+      }
+    }
+
+    &.mode--light {
+      color: $light;
+      transition: box-shadow .2s ease-out, color .2s ease-out;
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+        box-shadow: inset 0 0 0 1px currentColor;
+        color: $light;
+      }
+
+      &:active {
+        color: rgba($light, .8);
+      }
+    }
+  }
+
+  /* Modifiers */
+
+  &.btn--round {
+    border-radius: 100%;
+    padding: 0;
+    width: 1em;
+    height: 1em;
+  }
+
+  &.rounded--left {
+    border-radius: 2em 0 0 2em;
+    margin-right: -0.1em;
+    padding-left: 1.5em;
+    padding-right: 1em;
+  }
+
+  &.rounded--right {
+    border-radius: 0 2em 2em 0;
+    margin-left: -0.1em;
+    padding-right: 1.5em;
+    padding-left: 1em;
+  }
+
+  &.size--mini {
+    padding: .3em .7em;
+    font-size: .8rem;
+    border-radius: 3px;
+  }
+
+  &.size--large {
+    font-size: 1.1rem;
+    padding: .6em 1.3em;
+  }
+
+  &.size--larger {
+    font-size: 1.3rem;
+    padding: .7em 1.5em;
+  }
+
+
+  // Icons
+
+  .icon {
+    position: relative;
+    top: -.2ex;
+  }
+}

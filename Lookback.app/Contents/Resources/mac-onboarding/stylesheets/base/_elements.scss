@@ -1,0 +1,57 @@
+/* =ELEMENTS
+
+Styling for plain HTML tags.
+--------------------------------------------- */
+
+html {
+  background: $background;
+  color: $text-color;
+  font: normal #{$base-size}px/#{$leading / $base-size} $sans;
+  user-select: none;
+  font-weight: 300;
+  cursor: default;
+  @include smooth;
+}
+
+body {
+  // Sticky footer with Flexbox
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  // end sticky footer
+  text-align: center;
+}
+
+figure {
+  margin: 0;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+header {
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+a:not(.btn) {
+  color: $link-color;
+  @include underline($offset: .15, $size: 2, $color: rgba(#fff, .3));
+}
+
+
+p,
+ul,
+ol,
+blockquote,
+table,
+pre {
+  margin: 0 0 $lineheight;
+}
+
+nav ul {
+  @include list-reset;
+}

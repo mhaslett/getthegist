@@ -1,0 +1,35 @@
+/* =HEADINGS
+--------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 $lineheight;
+  font-weight: 300;
+}
+
+.fancy {
+  font-family: $serif;
+  font-weight: normal;
+}
+
+.huge {
+  font-weight: bold;
+  font-size: to_rem(64);
+  line-height: 1;
+
+  & + h2.fancy {
+    font-size: to_rem(25);
+  }
+}
+
+h1 {
+  font-size: to_rem(20);
+}
+
+h2 {
+  font-size: to_rem(16);
+}
+
+h1, h2 {
+  max-width: to_rem(480);
+  margin: 0 auto $lineheight;
+}

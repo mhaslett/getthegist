@@ -1,0 +1,263 @@
+// MIXINS
+
+@import 'mixin-underlines';
+
+@mixin highlight {
+  @include underline;
+}
+
+@mixin fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+}
+
+@mixin wrap($center: true, $max-width: $wrapper-width) {
+  max-width: $max-width;
+  width: 90%;
+
+  @if $center {
+    margin: 0 auto;
+  }
+}
+
+@mixin box {
+  background-color: #fff;
+  border-radius: $border-radius + 2px;
+  box-shadow: rgba(#000, .1) 0 1px 2px;
+  border: 1px solid #dadada;
+}
+
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder { /* WebKit browsers */
+    @content;
+  }
+  &::-moz-placeholder { /* Mozilla Firefox 19+ */
+    @content;
+  }
+  &:-ms-input-placeholder { /* Internet Explorer 10+ */
+    @content;
+  }
+}
+
+// Font smoothing for WebKit (1) and Firefox (2).
+@mixin smooth($enabled: true) {
+  @if $enabled {
+    -webkit-font-smoothing: antialiased;    // 1
+    -moz-osx-font-smoothing: grayscale;     // 2
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased; // 1
+    -moz-osx-font-smoothing: auto;                // 2
+  }
+}
+
+@mixin arrow($size, $color, $direction: up, $height: $size, $width: $size, $equilateral: true) {
+  width: 0;
+  height: 0;
+  border: solid transparent;
+
+  @if $direction == up {
+    border-width: 0 $width $height $width;
+    border-bottom-color: $color;
+    @if $equilateral == true {
+      border-bottom-width: $size * 2 * 0.866;
+    }
+  }
+  @if $direction == down {
+    border-width: $height $width 0 $width;
+    border-top-color: $color;
+    @if $equilateral == true {
+      border-top-width: $size * 2 * 0.866;
+    }
+  }
+  @if $direction == left {
+    border-width: $height $width $height 0;
+    border-right-color: $color;
+    @if $equilateral == true {
+      border-right-width: $size * 2 * 0.866;
+    }
+  }
+  @if $direction == right {
+    border-width: $height 0 $height $width;
+    border-left-color: $color;
+    @if $equilateral == true {
+      border-left-width: $size * 2 * 0.866;
+    }
+  }
+}
+
+@mixin arrow-box($position: bottom, $size: 11px, $color: #000, $background-color: #fff, $offset: 0, $padding: $size) {
+  position: relative;
+  padding: $padding;
+
+  &::before, &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    border-style: solid;
+    border-color: transparent;
+  }
+
+  &::before {
+    border-width: $size;
+    border-#{$position}-color: $color;
+    #{$position}: $offset;
+
+    @if $position == left or $position == right {
+      top: calc(50% - #{$size});
+    } @else {
+      left: calc(50% - #{$size});
+    }
+  }
+  &::after {
+    border-width: $size;
+    border-#{$position}-color: $background-color;
+    #{$position}: $offset - 1px;
+
+    @if $position == left or $position == right {
+      top: calc(50% - #{$size});
+    } @else {
+      left: calc(50% - #{$size});
+    }
+  }
+}
+
+@mixin icon($icon: false, $size: inherit) {
+  font-family: 'entypo';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  vertical-align: middle;
+  line-height: 1;
+  font-size: $size;
+  user-select: none;
+  cursor: default;
+
+  @if($icon) {
+    content: $icon;
+  }
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin setButtonIconSize($size) {
+  width: $size;
+  height: $size;
+
+  .icon {
+    line-height: $size;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: inherit;
+  }
+}
+
+@mixin list-reset {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin has-separator($color: $text-color, $width: 15rem, $spacing: 2, $position: after) {
+  &::#{$position} {
+    content: '';
+    display: block;
+    border-bottom: 1px solid $color;
+    max-width: $width;
+    width: 80%;
+    margin: $lineheight*$spacing auto $lineheight*($spacing + 1);
+
+    @include handheld {
+      max-width: 5rem;
+      margin: $lineheight auto;
+    }
+  }
+}
+
+@mixin footer-style($base-color) {
+  $color: mix(#fff, $base-color);
+  background-color: mix(#000, $base-color, 45%);
+  color: $color;
+  box-shadow: none;
+
+  a {
+    color: $color;
+
+    &:hover {
+      color: mix(#fff, $base-color, 80%);
+    }
+  }
+
+  .faded {
+    color: rgba($color, .8);
+  }
+
+  .logo__swirl,
+  .logo__text {
+    fill: rgba($color, .8);
+  }
+
+  .lookback-logo:hover .logo__swirl,
+  .lookback-logo:hover .logo__text {
+    fill: #fff;
+  }
+
+  .nav--current a {
+    color: #fff;
+  }
+}
+
+@mixin truncate($max: 100%) {
+  display: inline-block;
+  max-width: $max;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@mixin fullscreen {
+  &:-webkit-full-screen {
+    @content;
+  }
+
+  &:-moz-full-screen {
+    @content;
+  }
+
+  &:full-screen {
+    @content;
+  }
+
+  &:fullscreen {
+    @content;
+  }
+}
+
+@mixin thin-heading {
+  font-family: $sans;
+  font-weight: 300;
+  font-size: to_rem(32);
+  color: darken($grey-dark, 10%);
+  letter-spacing: -.5px;
+}

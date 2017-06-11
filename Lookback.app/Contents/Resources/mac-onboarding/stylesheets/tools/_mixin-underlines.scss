@@ -1,0 +1,35 @@
+@mixin underline-offset($offset) {
+  background-position: 0 1em + $offset;
+}
+
+@mixin underline-size($size) {
+  background-size: to_rem($size) to_rem($size);
+}
+
+@mixin underline-color($color) {
+  background-image: linear-gradient(to bottom, rgba($color, 0) 50%, $color 50%);
+}
+
+@mixin underline($size: 2.8, $color: $link-color, $bg: $background, $offset: 0, $clear-descenders: true) {
+  text-decoration: none;
+  background-repeat: repeat-x;
+  @include underline-offset($offset);
+  @include underline-size($size);
+  @include underline-color($color);
+  padding-bottom: to_rem($size) + to_rem($offset);
+
+  // This will usually be used for links, so we don't want the default text-decoration on hover
+  &:hover {
+    text-decoration: none;
+  }
+
+  @if $clear-descenders {
+    $unit: .5;
+    text-shadow:  to_em(-$unit) to_em(-$unit) 0 $bg,
+                  to_em($unit) to_em(-$unit) 0 $bg,
+                  to_em($unit) to_em($unit) 0 $bg,
+                  to_em(-$unit) to_em($unit) 0 $bg,
+                  to_em($unit*2) 0 0 $bg,
+                  to_em(-$unit*2) 0 0 $bg;
+  }
+}

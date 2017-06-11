@@ -1,0 +1,88 @@
+@keyframes bump-iphone {
+  45% {
+    transform: translate(-5px, 0);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes bump-usb {
+  60% {
+    transform: translate(-120px, 0);
+  }
+
+  100% {
+    transform: translate(-108px, 0);
+  }
+}
+
+@keyframes arrow-move {
+  100% {
+    transform: translate(-5px, 0);
+  }
+}
+
+.pane__plugin {
+
+  &.in {
+    .figure__usb {
+      animation: bump-usb .6s .5s ease-out both;
+    }
+    .figure__iphone {
+      animation: bump-iphone .17s .9s ease-out both;
+    }
+  }
+
+  .figure--plugin {
+    display: flex;
+  }
+
+  .figure__iphone {
+    flex: 1;
+    z-index: 10;
+  }
+
+  .figure__usb {
+    z-index: 1;
+    margin-right: -8rem;
+    transform: translate(260px, 0);
+  }
+}
+
+.figure__trust {
+  position: relative;
+
+  .figure__help {
+    position: absolute;
+    top: 67%;
+    left: 440px;
+
+    .arrow-left {
+      margin-right: .1rem;
+      display: inline-block;
+      animation: arrow-move .5s ease-in infinite alternate;
+    }
+  }
+}
+
+.figure__dropdown {
+  position: relative;
+
+  .figure__help {
+    position: absolute;
+    max-width: 330px;
+    margin: 0;
+    left: 44%;
+    bottom: 0;
+    text-align: left;
+  }
+}
+
+.links {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 7%;
+  line-height: 1.3;
+}

@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+    "strict": 0,
+    "quotes": [2, "single"],
+    "no-underscore-dangle": 0,
+    "curly": 0,
+    "no-debugger": 1,
+    "no-multi-spaces": 0,
+    "no-unused-expressions": 1,
+    "no-unused-vars": 1
+  },
+
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+
+  "globals": {
+    "App": true
+  }
+}
